@@ -12,8 +12,8 @@ class Usuario{
   }
    //getters
   // escrita do get tradicional
- String? getNome() {
-   return _nome;
+ String? get login {
+   return _login;
   }
   //escrita do get no estilo dart
 String? get nome => _nome;
@@ -22,7 +22,7 @@ int? get codigo => _codigo;
 
   //setters
  //escrita dos set tradicional
- set login (String login){
+ set login (String? login){
    _login = login;
  }
  //escrita do set no estilo Dart
