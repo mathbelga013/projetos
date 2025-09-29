@@ -3,21 +3,21 @@ import 'package:mimpedir/tela_home.dart';
 import 'usuario.dart';
 
 class TelaLogin extends StatelessWidget{
-  TelaLogin({super.key});
-
-  final TextEditingController UsuarioController = TextEditingController();
-  final TextEditingController Senhacontroller  = TextEditingController();
+   TelaLogin({super.key});
 
   Usuario u = Usuario(
-    codigo:1,
-    senha: "@teteu123",
+    nome: 'teteu013',
     login: 'admin',
-    nome:'Administrador'
+    senha: '@teteu123'
   );
+
+   final TextEditingController UsuarioController = TextEditingController();
+  final TextEditingController Senhacontroller  = TextEditingController();
+
   @override
   Widget build (BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("data")),
+      appBar: AppBar(title: const Text('tela de login: ')),
       body: Padding(padding: const EdgeInsets.all(24.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -26,29 +26,41 @@ class TelaLogin extends StatelessWidget{
               decoration: const InputDecoration(labelText: 'Usuário'),
               controller: UsuarioController,
             ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 20),
             TextField(
               decoration: const InputDecoration(labelText: 'Senha'),
               obscureText: true,
-              controller: Senhacontroller
-              ,
+              controller: Senhacontroller,
             ),
-            const SizedBox(height: 40),
-            ElevatedButton(onPressed: (){
+            const SizedBox(height: 20),
+            ElevatedButton(onPressed: () async {
 
-              if(u.login == UsuarioController.text && u.senha == Senhacontroller.text) {
+              /*if(u.login == UsuarioController.text && u.senha == Senhacontroller.text) {
+               //print('deu certo vai abrir outra página');
                Navigator.push(context,
                    MaterialPageRoute(builder: (context) => TelaHome())
                );
               }else {
+              print('deu errado nao vai abrir outra página');
+               */
+
+              final sucesso = await UsuarioDAO.autenticar(UsuarioController.text, Senhacontroller.text);
+
+              if(sucesso){
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => TelaHome())
+                );
+              }else{
                 ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text("Login ou Senha inválidos!!"))
+                  const  SnackBar(content: Text('Login inválido!!'))
                 );
               }
-            }, child: Text ("Login"))
+
+              },child:const Text ('Entrar')),
           ],
         ),
-      )
+      ),
     ); 
   }
+
 }
