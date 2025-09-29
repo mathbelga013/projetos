@@ -8,7 +8,7 @@ class TelaHome extends StatelessWidget{
     return Scaffold(
       appBar: AppBar(title: const Text('Tela Home')),
       body: Center(
-        child: Text('Seja bem vindos ao mim Pedir!!!'),
+        child: Text('Seja bem vindos !!'),
       ),
     );
   }
