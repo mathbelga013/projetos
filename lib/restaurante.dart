@@ -1,17 +1,17 @@
 import 'package:mimpedir/usuario.dart';
-import 'package:mimpedir/telas/tipo.dart';
+import 'package:mimpedir/tipo.dart';
 
 class Restaurante {
   int? _codigo;
   String? _nome;
-  double? _latitude;
-  double? _longitude;
+  String? _latitude;
+  String? _longitude;
   Usuario? _proprietario;
   Tipo? _culinaria;
 
   //construtor
   Restaurante(
-      {int? codigo, String? nome, double? latitude, double? longitude, Usuario? proprietario, Tipo? culinaria}) {
+      {int? codigo, String? nome, String? latitude, String? longitude, Usuario? proprietario, Tipo? culinaria}) {
     _codigo = codigo;
     _nome = nome;
     _latitude = latitude;
@@ -25,9 +25,9 @@ class Restaurante {
 
   String? get nome => _nome;
 
-  double? get latitude => _latitude;
+  String? get latitude => _latitude;
 
-  double? get longitude => _longitude;
+  String? get longitude => _longitude;
 
   Usuario? get proprietario => _proprietario;
 
@@ -36,7 +36,7 @@ class Restaurante {
  //setters
 set _codigo(int? codigo) => _codigo = codigo;
 set _nome(String? nome) => _nome = nome;
-set _latitude(double? latitude) => _latitude = latitude;
-set _longitude(double? longitude) => _longitude = longitude;
+set _latitude(String? latitude) => _latitude = latitude;
+set _longitude(String? longitude) => _longitude = longitude;
 set _proprietario(Usuario? proprietario) => _proprietario = proprietario;
 set _culinaria(Tipo? culinaria) => _culinaria = culinaria;

@@ -8,6 +8,9 @@ class Tipo {
   }
   //getters
   // escrita do get tradicional
+  int? get codigo {
+    return _codigo;
+  }
   String? get nome {
     return _nome;
   }

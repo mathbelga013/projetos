@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mimpedir/tela_cad_restaurante.dart';
-import 'package:mimpedir/tela.edit_restaurante.dart';
-import 'restaurante.dart'
+import './tela_cad_restaurante.dart';
+import './tela_edit_restaurante.dart';
+import './restaurante.dart';
 import 'banco/restaurante_dao.dart';
 
 class TelaHome extends StatefulWidget {
@@ -32,8 +32,17 @@ class _TelaHomeState extends State<TelaHome> {
     return Scaffold(
       appBar: AppBar(title: const Text("Lista de restaurantes"),
       actions: [
-        TextButton(onPressed: (){
-           MaterialPageRoute(builder: (context) => TelaCadRestaurantes());
+        TextButton(onPressed: () async {
+          final t = await Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => TelaCadRestaurante()),
+          );
+
+          if (t == false || t == null) {
+            setState(() {
+              carregarRestaurantes();
+            });
+          }
         },
         child: Icon(Icons.add))
       ],
@@ -54,14 +63,16 @@ class _TelaHomeState extends State<TelaHome> {
                   children: [
                     IconButton(
                       icon: const Icon(Icons.edit, color: Colors.blue),
-                      onPressed: () {
-                        //TODO: Editar restaurante
+                      onPressed: () async {
+                        TelaEditRestaurante.restaurante = await RestauranteDAO.listar(r.codigo);
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => TelaEditRestaurante()));
                       },
                     ),
                     IconButton(
                       icon: const Icon(Icons.delete, color: Colors.red),
-                      onPressed: () {
-                        //TODO:Excluir restaurante
+                      onPressed: () async {
+                        TelaEditRestaurante.restaurante = await RestauranteDAO.listar(r.codigo);
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => TelaEditRestaurante()));
                       },
                     ), //IconButton
                   ],
@@ -71,10 +82,13 @@ class _TelaHomeState extends State<TelaHome> {
           },
         ),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: (){
-        MaterialPageRoute(builder: (context) => TelaCadRestaurante());
-          },
-          child: Icon(Icons.add)
+      floatingActionButton: FloatingActionButton(onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => TelaCadRestaurante()),
+        );
+      },
+        child: Icon(Icons.add),
       ),
     );
   }
